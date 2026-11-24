@@ -1,0 +1,31 @@
+{{define "list"}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Personnages – Rick &amp; Morty</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <h1>Les personnages de Rick &amp; Morty</h1>
+  <form action="/personnages" method="get" class="search">
+    <input type="search" name="nom" value="{{.Search}}" placeholder="Rechercher un personnage">
+    <button type="submit">Rechercher</button>
+  </form>
+  <ul class="grid">
+    {{range .Characters}}
+      <li class="card">
+        <a href="/personnages/{{.ID}}">
+          <img src="{{.Image}}" alt="{{.Name}}">
+          <strong>{{.Name}}</strong>
+          <span>{{.Status}} – {{.Species}}</span>
+        </a>
+      </li>
+    {{else}}
+      <li>Aucun personnage ne correspond à « {{.Search}} ».</li>
+    {{end}}
+  </ul>
+  <footer>Données : The Rick and Morty API (rickandmortyapi.com)</footer>
+</body>
+</html>
+{{end}}
